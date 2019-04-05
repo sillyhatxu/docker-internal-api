@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+
+  module-name:
+    image: "module-name:latest"
+    ports:
+      - 12888:8080
+
+  internal-module-name:
+    image: "internal-module-name:latest"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/info"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
